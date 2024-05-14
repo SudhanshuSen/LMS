@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+      body{
+        background-color: rgb(48, 44, 44);
+        margin: 10px 10px;
+      padding-top: 15px;
+    }
+      
+        .container{
+          margin: 0 auto;
+      padding: 20px;
+      height: 550px;
+            background-color: rgb(226, 193, 230);
+        }
+      
+        .box {
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size: 25px;
+            
+            padding-left: 10px;
+            width: 300px;
+      margin-left:30px;
+     text-align: left;
+      
+    }
+    .box2{
+       margin-top: 1px;
+        width: 235px;
+      margin-left:550px;
+      padding: 2px;
+    
+
+    }
+    .box3 img{
+       
+       margin-bottom: 50px;
+       mix-blend-mode: multiply;
+       width:450px;
+       height: 250px;
+     margin-left:750px;
+     
+    
+    
+   
+
+   }
+    label, input {
+      display: block;
+      margin-bottom: 20px;
+      margin-top: 20px;
+    }
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 10px;
+    }
+    .login-form input[type="submit"] {
+      background-color: rgb(98, 65, 95);
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px ;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .block{
+        display: flex;
+      flex-wrap: wrap;
+      justify-content: left;
+      margin-bottom: 50px;
+    }
+    .logo {
+        
+        
+        margin-left:30px;
+      margin-top: 0px;
+    }
+    
+    .logo img {
+       display: inline-block;
+      width: 130px;
+    
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div class="block">
+        <div class="box">
+         <h1>Learning<br>Management<br>Systems<br>Login</h1>
+        </div>
+
+        <div class="box2">
+            <div class="logo">
+            <img src="images/login.png" alt="LMS Logo" >
+            </div>
+            <!-- <form class="login-form" onsubmit="submitFunc(e)"> -->
+              <input type="email" id="email" name="Email" placeholder="Email" required>
+              <input type="password" id="pass" name="password" placeholder="Password" required>
+              <!-- <input type="submit" value="Login">   -->
+              <button onclick="submitFunc()">Submit</button>
+            <!-- </form> -->
+          </div>
+          <div class="box3">
+            <img src="images/login3.jpeg">
+          </div>
+          </div>
+    </div>
+    <script>
+      const submitFunc = (d) => {
+      console.log("hello");
+       let email = document.getElementById("email").value
+       let pass = document.getElementById("pass").value    
+       fetch("https://10.21.87.45:8000/api/login/", {
+     method: "POST",
+          body: JSON.stringify({
+         email: email,
+         password: pass, 
+     }),
+     withCredentials: true,
+     headers: {
+         "Content-type": "application/json; charset=UTF-8"
+     }
+ }).then(response => response.json())
+ .then(json => {
+  console.log(json)
+  if(json.status == 200){
+  window.location.href = "http://localhost:5500/home.html"
+  }
+}
+ );
+    }    
+      
+    </script>
+</body>
+</html>
